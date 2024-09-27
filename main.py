@@ -38,7 +38,7 @@ def food_input():
 def calorie_splitter():
     text_input= food_input()
     
-    food_list = re.split(r'[,\s;\\-:_=*]+',text_input) 
+    food_list = tokenize_rulebased(text_input) 
     #print(food_list)
     calories = [int(food) for food in food_list if food.isdigit()]
    
@@ -51,6 +51,60 @@ def calorie_splitter():
 
     return total_calories
 
+import string
+
+def tokenize_whitespace_rule(text):
+    prev_c=' '
+    tokens=[]
+    
+    for c in text:
+        if not c in string.whitespace:
+            if prev_c in string.whitespace:
+                is_new_token=True
+                
+            else:
+                is_new_token=False
+                
+            if is_new_token:
+                tokens.append(c)
+            else:
+                tokens[-1]+=c
+        prev_c=c
+    return tokens
+
+def tokenize_rulebased(text):
+  # your code!
+  prev_c = ' ' # Keep track of the previous character (and set as a space initially)
+  tokens = []
+
+  # Loop through each character in the text
+  for c in text:
+      if not c in string.whitespace:
+          if prev_c in string.whitespace:
+              is_new_token=True
+          if prev_c in string.whitespace:
+              is_new_token=True
+          elif c in string.ascii_letters and not prev_c in string.ascii_letters:
+              is_new_token=True
+          elif c in string.punctuation and not prev_c in string.punctuation:
+              is_new_token = True 
+          elif c in string.digits and not prev_c in string.digits:
+              is_new_token = True
+          else: # This is continuation of a token
+              is_new_token=False
+          if is_new_token:
+              tokens.append(c)
+          else:
+              tokens[-1]+=c
+      prev_c=c
+  return tokens
+                
+          
+      
+      
+  
+
+
 user_choice = int(input("1. Calculate Total calories from the text!\n2.Exit\n"))
 
 if(user_choice==1):
@@ -60,4 +114,5 @@ if(user_choice==1):
     
 else:
     exit
+    
 
