@@ -1,3 +1,5 @@
+
+import sys
 import re
 
 #we get the simple text from your notesapp or from your manual typying, either way works
@@ -82,8 +84,6 @@ def tokenize_rulebased(text):
       if not c in string.whitespace:
           if prev_c in string.whitespace:
               is_new_token=True
-          if prev_c in string.whitespace:
-              is_new_token=True
           elif c in string.ascii_letters and not prev_c in string.ascii_letters:
               is_new_token=True
           elif c in string.punctuation and not prev_c in string.punctuation:
@@ -99,7 +99,17 @@ def tokenize_rulebased(text):
       prev_c=c
   return tokens
                 
-          
+def weekly_avg() :
+    #just calculates weekly average and to compare the trend and each week what food was highest and how much weight difference has been the result of it.
+    pass
+
+def weekly_calc():
+    #this is the former function to calculate if it was deficit or surplus and then show how much was it and what the foods contributing to imbalance
+    pass
+
+def weight_calc():
+    #depending on the surplus or deficit, every 3500 cal is 1lb or 0.45kgs
+    pass          
       
       
   
